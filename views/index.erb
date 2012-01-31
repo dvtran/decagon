@@ -1,0 +1,10 @@
+<form action = "/" method = "post">
+	<textarea name="body"></textarea>
+ 	<input type="submit" value="create a thread" />
+</form>
+
+<% @posts.each do |post| %>
+	<div class = "post">
+		<p><%= post.body %></p>
+		<% end %>
+	</div>
