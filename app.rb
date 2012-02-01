@@ -70,19 +70,27 @@ post '/' do
 end
 
 get '/thread/:id' do
-	@dem_posts = Post.all(:thread => params[:id])
-	@dat_id = params[:id]
-	erb :post
+	if Post.count(:thread => params[:id]) > 0
+		@dem_posts = Post.all(:thread => params[:id])
+		@dat_id = params[:id]
+		erb :post
+	else
+		redirect 'not_found'
+	end
 end
 
 post '/reply/:id' do
-	p = Post.new
-	p.body = params[:body]
-	p.parent = false
-	p.thread = params[:id]
-	p.birth = Time.now
-	p.save
-	redirect '/thread/' + params[:id]
+	if Post.count(:thread => params[:id]) > 0
+		p = Post.new
+		p.body = params[:body]
+		p.parent = false
+		p.thread = params[:id]
+		p.birth = Time.now
+		p.save
+		redirect '/thread/' + params[:id]
+	else
+		redirect 'not_found'
+	end
 end
 
 not_found do
