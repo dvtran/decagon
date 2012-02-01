@@ -39,18 +39,21 @@ end
 class Post
 	include DataMapper::Resource
 
-	property :id,		Serial
-	property :body,		Text, 		:required => true
-	# property :cat,		String	# board catagory
-	property :birth,	DateTime
+	property :id,		Serial	# post number, auto incremented
+	property :body,		Text, 		:required => true	# body of post
+#	property :cat,		String	# board catagory
+	property :parent,	Boolean # is the post a parent or not
+	property :thread,	Integer # what thread does the post belong to? (parent post id = thread number)
+	property :birth,	DateTime # when was the post created?
 end
+
 DataMapper.finalize.auto_upgrade!
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # routes
 
 get '/' do
-	@posts = Post.all :order => :id.desc
+	@posts = Post.all(:parent => true, :order => :id.desc) # only list parent posts
 	erb :index
 end
 
@@ -58,17 +61,28 @@ post '/' do
 	p = Post.new
 	p.body = params[:body]
 	# p.cat = params[:board] #  let's get this done later
+	p.parent = true
 	p.birth = Time.now
+	p.save
+	p.thread = p.id
 	p.save
 	redirect '/'
 end
 
-get '/post/:id' do
-	if @dat_post = Post.all(:id => params[:id])
-		erb :post
-	else
-		not_found
-	end
+get '/thread/:id' do
+	@dem_posts = Post.all(:thread => params[:id])
+	@dat_id = params[:id]
+	erb :post
+end
+
+post '/reply/:id' do
+	p = Post.new
+	p.body = params[:body]
+	p.parent = false
+	p.thread = params[:id]
+	p.birth = Time.now
+	p.save
+	redirect '/thread/' + params[:id]
 end
 
 not_found do

@@ -1,6 +1,13 @@
-<% @dat_post.each do |post| %>
+<div class = "form">
+	<form action = "/reply/<%= @dat_id %>"method = "post">
+		<textarea name="body"></textarea>
+	 	<input type = "submit" value = "reply" class = "thread_button"/>
+	</form>
+</div>
+
+<% @dem_posts.each do |post| %>
 	<div class = "post">
-		<h3><a href = "/post/<%= post.id%>"><%= post.id%></a></h3>
+		<h3><a href = "/thread/<%= post.thread%>"><%= post.id%></a></h3>
 		<p><%=escape post.body %></p>
 		<hr />
 	</div>
