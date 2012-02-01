@@ -7,6 +7,9 @@
 
 <% @posts.each do |post| %>
 	<div class = "post">
+		<h3><a href = "/post/<%= post.id%>"><%= post.id%></a></h3>
 		<p><%=escape post.body %></p>
+		<hr />
+
 	</div>
 <% end %>

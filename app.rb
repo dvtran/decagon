@@ -62,3 +62,15 @@ post '/' do
 	p.save
 	redirect '/'
 end
+
+get '/post/:id' do
+	if @dat_post = Post.all(:id => params[:id])
+		erb :post
+	else
+		not_found
+	end
+end
+
+not_found do
+  "these are not the pages you're looking for."
+end

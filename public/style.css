@@ -3,6 +3,7 @@
 	margin-left: auto;
 	margin-right: auto;
 }
+
 .header {
 	margin-top: -70px;
 	text-align: center;
@@ -17,16 +18,18 @@
 }
 
 body {
-	font-family: 'Helvetica Neue', Arial, sans-serif; text-align:left;
+	/* font-family: 'Helvetica Neue', Arial, sans-serif; */
+	font-family: 'Courier New', Courier, monospace;
+	text-align:left;
 	margin:0 auto;
 }
 
 h1, h2, h3, p {color:#333333;}
-
+h1, h2, h3 {font-family: 'Helvetica Neue', Arial, sans-serif;}
 h1 	{font-size: 62pt;}
 h2 	{font-size: 42pt;}
 h3 	{font-size: 22pt;}
-p 	{font-size: 10pt; font-family: 'Courier New';}
+p 	{font-size: 10pt;}
 
 .thread_button {
 	margin-top: 10px;
@@ -35,6 +38,8 @@ textarea {
 	width: 600px; 
 	height: 100px;
 	border-color: black;
+
+	font-family: 'Courier New', Courier, monospace;
 }
 
 .form {
