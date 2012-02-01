@@ -6,17 +6,19 @@
   <link href="/reset.css" rel="stylesheet"> 
   <link href="/style.css" rel="stylesheet">  
 </head>  
-<body>  
-  <header>  
-      <h1><a href="/">decagon</a></h1>
-  </header>  
-  
-  <div id="main">  
-    <%= yield %>    
-  </div>  
-  
-  <footer>  
-    <p><small>by <a href="http://twitter.com/_dvtran">dvtran</a></small></p>  
-  </footer>  
-</body>  
+<div id = "container">
+  <body>  
+    <div class = "header">  
+        <h1><a href="/"><img src = "/decagon_banner.png"/></a></h1>
+    </div>        
+    
+    <div class = "content">
+      <%= yield %> 
+    </div>
+          
+    <div class = "footer">  
+      <p><small>by <a href="http://twitter.com/_dvtran">dvtran</a></small></p>  
+    </div>  
+  </body>  
+</div>
 </html>

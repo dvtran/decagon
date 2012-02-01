@@ -16,6 +16,14 @@ require 'dm-sqlite-adapter'
 # require 'dm-postgres-adapter'
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# helpers
+
+helpers do  
+    include Rack::Utils  
+    alias_method :escape, :escape_html  
+end
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # setting up the database
 
 # DataMapper.setup(:default, 'postgres://localhost/database.db') # establish postgres connection
