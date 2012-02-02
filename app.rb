@@ -13,7 +13,7 @@ require 'rubygems'
 require 'sinatra'
 require 'data_mapper'
 require 'dm-sqlite-adapter'
-# require 'dm-postgres-adapter'
+require 'dm-postgres-adapter'
 # require 'carrierwave' # for file uploading
 # require 'rmagick'
 # require 'rdiscount'
