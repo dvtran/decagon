@@ -1,5 +1,0 @@
-sinatra
-thin
-data_mapper
-dm-postgres-adapter
-pg
