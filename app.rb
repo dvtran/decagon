@@ -13,7 +13,6 @@ require 'rubygems'
 require 'sinatra'
 require 'thin'
 require 'data_mapper'
-# require 'dm-sqlite-adapter'
 require 'dm-postgres-adapter'
 # require 'carrierwave' # for file uploading
 # require 'rmagick'
@@ -36,15 +35,8 @@ end
 # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # setting up the database
 
-# DataMapper.setup(:default, 'postgres://localhost/database.db') # establish postgres connection
-
-configure :development do
-  DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/database.db")
-end
-
-configure :production do
-  DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://#{Dir.pwd}/database.db")
-end
+# okay, we're going to use postgresql both on dev and production from now on
+DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://localhost/database.db')
 
 class Post
 	include DataMapper::Resource
