@@ -1,5 +1,9 @@
+<div class = "board_name">
+	<a href = "/<%= @board_name %>"><%= @board_name %></a>
+</div>
+
 <div class = "form">
-	<form action = "/reply/<%= @dat_id %>"method = "post">
+	<form action = "/<%= @board_name %>/reply/<%= @dat_id %>"method = "post">
 		<textarea name="body"></textarea>
 	 	<input type = "submit" value = "reply" class = "thread_button"/>
 	</form>
@@ -7,7 +11,7 @@
 
 <% @dem_posts.each do |post| %>
 	<div class = "post">
-		<h3><a href = "/thread/<%= post.thread%>"><%= post.id%></a></h3>
+		<h3><a href = "/<%= post.board%>/thread/<%= post.thread%>"><%= post.id%></a></h3>
 		<p><%=escape post.body %></p>
 		<hr />
 	</div>

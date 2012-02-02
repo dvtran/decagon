@@ -14,6 +14,7 @@ require 'sinatra'
 require 'data_mapper'
 require 'dm-sqlite-adapter'
 # require 'dm-postgres-adapter'
+require 'carrierwave' # for file uploading
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # helpers
@@ -22,6 +23,11 @@ helpers do
     include Rack::Utils  
     alias_method :escape, :escape_html  
 end
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# some helpful vars
+
+@@boards = ["art", "design", "fashion", "humour", "math", "music", "photography", "technology", "variety", "writing"]
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # setting up the database
@@ -40,8 +46,8 @@ class Post
 	include DataMapper::Resource
 
 	property :id,		Serial	# post number, auto incremented
-	property :body,		Text, 		:required => true	# body of post
-#	property :cat,		String	# board catagory
+	property :body,		Text, :required => true	# body of post
+	property :board,	String	# board catagory
 	property :parent,	Boolean # is the post a parent or not
 	property :thread,	Integer # what thread does the post belong to? (parent post id = thread number)
 	property :birth,	DateTime # when was the post created?
@@ -52,44 +58,64 @@ DataMapper.finalize.auto_upgrade!
 # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # routes
 
+# homepage
 get '/' do
 	@posts = Post.all(:parent => true, :order => :id.desc) # only list parent posts
 	erb :index
 end
 
-post '/' do
-	p = Post.new
-	p.body = params[:body]
-	# p.cat = params[:board] #  let's get this done later
-	p.parent = true
-	p.birth = Time.now
-	p.save
-	p.thread = p.id
-	p.save
-	redirect '/'
+# sort the posts by board
+get '/:board' do
+	if @@boards.include? params[:board] # this is to check if the board exsists.
+		@board_name = params[:board]
+		@board_posts = Post.all(:parent => true, :order => :id.desc, :board => params[:board])
+		erb :board
+	else
+		not_found
+	end
 end
 
-get '/thread/:id' do
+# handle new board posts
+post '/:board' do
+	if @@boards.include? params[:board]
+		p = Post.new
+		p.body = params[:body]
+		p.board = params[:board]
+		p.parent = true
+		p.birth = Time.now
+		p.save
+		p.thread = p.id
+		p.save
+		redirect '/' + params[:board]
+	else
+		not_found
+	end
+end
+
+# individual threads
+get '/:board/thread/:id' do
 	if Post.count(:thread => params[:id]) > 0
+		@board_name = params[:board]
 		@dem_posts = Post.all(:thread => params[:id])
 		@dat_id = params[:id]
 		erb :post
 	else
-		redirect 'not_found'
+		not_found
 	end
 end
 
-post '/reply/:id' do
+post '/:board/reply/:id' do
 	if Post.count(:thread => params[:id]) > 0
 		p = Post.new
 		p.body = params[:body]
+		p.board = params[:board]
 		p.parent = false
 		p.thread = params[:id]
 		p.birth = Time.now
 		p.save
-		redirect '/thread/' + params[:id]
+		redirect params[:board] + '/thread/' + params[:id]
 	else
-		redirect 'not_found'
+		not_found
 	end
 end
 

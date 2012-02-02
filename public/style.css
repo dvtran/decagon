@@ -5,8 +5,26 @@
 }
 
 .header {
-	margin-top: -70px;
+	/* margin-top: -70px; */
 	text-align: center;
+}
+
+.board_name {
+	width: 565px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: green;
+	margin-bottom: 10px;
+	padding: 2px;
+	padding-left: 	20px;
+	padding-right: 	20px;
+	padding-top: 	5px;
+	padding-bottom:	5px;
+
+	font-family: 'Helvetica Neue', Arial, sans-serif;
+	text-align: center;
+	font-size: 60px;
+	
 }
 
 .content {
@@ -43,7 +61,7 @@ textarea {
 }
 
 .form {
-	margin-top: -50px;
+	/* margin-top: -50px; */
 	margin-bottom: 10px;
 }
 .post {
