@@ -53,7 +53,8 @@ class Post
 	property :board,	String	# board catagory
 	property :parent,	Boolean # is the post a parent or not
 	property :thread,	Integer # what thread does the post belong to? (parent post id = thread number)
-	property :birth,	DateTime # when was the post created?
+	property :created_at, DateTime # when was this post created?
+	property :created_on, Date
 end
 
 DataMapper.finalize.auto_upgrade!
@@ -85,7 +86,7 @@ post '/:board' do
 		p.body = params[:body]
 		p.board = params[:board]
 		p.parent = true
-		p.birth = Time.now
+		p.created_at = Time.now
 		p.save
 		p.thread = p.id
 		p.save
@@ -101,7 +102,7 @@ get '/:board/thread/:id' do
 		@board_name = params[:board]
 		@dem_posts = Post.all(:thread => params[:id])
 		@dat_id = params[:id]
-		erb :post
+		erb :thread
 	else
 		not_found
 	end
@@ -114,7 +115,7 @@ post '/:board/reply/:id' do
 		p.board = params[:board]
 		p.parent = false
 		p.thread = params[:id]
-		p.birth = Time.now
+		p.created_at = Time.now
 		p.save
 		redirect params[:board] + '/thread/' + params[:id]
 	else

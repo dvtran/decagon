@@ -51,8 +51,10 @@ body {
 	text-align:left;
 	margin:0 auto;
 }
-a:visited {color:#00e;}
-a:hover {color: black;}
+a {color:black;}
+/* a:visited {color:#00e;} */
+a:visited {color:black;}
+a:hover {background-color: black; color: white;}
 h1, h2, h3, p {color:#333333;}
 h1, h2, h3 {font-family: 'Helvetica Neue', Arial, sans-serif;}
 h1 	{font-size: 62pt;}
