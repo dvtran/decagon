@@ -13,7 +13,6 @@ require 'rubygems'
 require 'sinatra'
 require 'thin'
 require 'data_mapper'
-require 'pg'
 require 'dm-postgres-adapter'
 # require 'carrierwave' # for file uploading
 # require 'rmagick'
