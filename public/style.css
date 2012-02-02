@@ -16,15 +16,11 @@
 	border-color: black;
 	margin-bottom: 10px;
 	padding: 2px;
-	padding-left: 	20px;
-	padding-right: 	20px;
-	padding-top: 	5px;
-	padding-bottom:	5px;
+	padding: 20px;
 
 	font-family: 'Courier New', Courier, monospace;
 	text-align: center;
 	font-size: 20px;
-	
 }
 
 .board_name {
@@ -34,11 +30,7 @@
 	border-color: black;
 	margin-bottom: 10px;
 	padding: 2px;
-	padding-left: 	20px;
-	padding-right: 	20px;
-	padding-top: 	5px;
-	padding-bottom:	5px;
-
+	padding: 20px;
 	font-family: 'Courier New', Courier, monospace;
 	text-align: center;
 	font-size: 60px;
@@ -59,7 +51,8 @@ body {
 	text-align:left;
 	margin:0 auto;
 }
-
+a:visited {color:#00e;}
+a:hover {color: black;}
 h1, h2, h3, p {color:#333333;}
 h1, h2, h3 {font-family: 'Helvetica Neue', Arial, sans-serif;}
 h1 	{font-size: 62pt;}

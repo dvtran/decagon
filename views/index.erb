@@ -1,7 +1,7 @@
 <% @posts.each do |post| %>
 	<div class = "post">
-		<h3><a href = "<%= post.board %>/thread/<%= post.thread %>"><%= post.id%></a></h3>
+		<p />
+		<p><a href = "/<%= post.board%>/thread/<%= post.thread%>"><%= post.id%></a> posted in <a href = "/<%= post.board%>">#<%= post.board %></a> on <%= post.birth %></p>
 		<p><%=escape post.body %></p>
-		<hr />
 	</div>
 <% end %>

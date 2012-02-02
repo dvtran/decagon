@@ -11,8 +11,8 @@
 
 <% @dem_posts.each do |post| %>
 	<div class = "post">
-		<h3><a href = "/<%= post.board%>/thread/<%= post.thread%>"><%= post.id%></a></h3>
+		<p />
+		<p><b><a href = "/<%= post.board%>/thread/<%= post.thread%>"><%= post.id%></a></b> posted on <%= post.birth %></p>
 		<p><%=escape post.body %></p>
-		<hr />
 	</div>
 <% end %>

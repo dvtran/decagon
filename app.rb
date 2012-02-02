@@ -14,7 +14,9 @@ require 'sinatra'
 require 'data_mapper'
 require 'dm-sqlite-adapter'
 # require 'dm-postgres-adapter'
-require 'carrierwave' # for file uploading
+# require 'carrierwave' # for file uploading
+# require 'rmagick'
+# require 'rdiscount'
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # helpers
@@ -27,7 +29,8 @@ end
 # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # some helpful vars
 
-@@boards = ["art", "design", "fashion", "humour", "math", "music", "photography", "technology", "variety", "writing"]
+@@boards = ["art", "design", "fashion", "humour", "math", "music", "photography", "technology", "writing", "variety"]
+
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # setting up the database
@@ -120,5 +123,5 @@ post '/:board/reply/:id' do
 end
 
 not_found do
-  "these are not the pages you're looking for."
+  "this is not the page you are looking for."
 end
