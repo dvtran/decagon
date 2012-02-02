@@ -13,6 +13,11 @@
     </div>        
     
     <div class = "content">
+      <div class = "navigation">
+        <% @@boards.each do |board| %>
+          <a href = "/<%= board %>">#<%= board %></a>
+        <% end %>
+      </div>
       <%= yield %> 
     </div>
           
