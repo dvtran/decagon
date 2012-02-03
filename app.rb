@@ -64,7 +64,7 @@ end
 
 # sort the posts by board
 get '/:board' do
-	if @@boards.include? params[:board] # this is to check if the board exsists.
+	if BOARDS.include? params[:board] # this is to check if the board exsists.
 		@board_name = params[:board]
 		@board_posts = Post.all(:parent => true, :order => :id.desc, :board => params[:board])
 		erb :board
@@ -75,7 +75,7 @@ end
 
 # handle new board posts
 post '/:board' do
-	if @@boards.include? params[:board]
+	if BOARDS.include? params[:board]
 		p = Post.new
 		p.body = params[:body]
 		p.board = params[:board]
