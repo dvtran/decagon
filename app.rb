@@ -15,6 +15,8 @@ require 'thin'
 require 'pg'
 require 'data_mapper'
 require 'dm-postgres-adapter'
+
+require 'rack/recaptcha'
 # require 'carrierwave' # for file uploading
 # require 'rmagick'
 # require 'rdiscount'
@@ -26,6 +28,10 @@ helpers do
     include Rack::Utils  
     alias_method :escape, :escape_html  
 end
+
+# recaptcha functionality
+# use Rack::Recaptcha, :public_key => '6LegJs0SAAAAADBEfN76m1VCzlRbKA8nO6AhA2O6', :private_key => '6LegJs0SAAAAAPvGn3wcDWRVgEAw7e1fz9trV6Z0'
+# helpers Rack::Recaptcha::Helpers
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # some helpful vars
