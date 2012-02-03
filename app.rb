@@ -30,7 +30,7 @@ end
 # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # some helpful vars
 
-@@boards = ["art", "design", "fashion", "humour", "math", "music", "photography", "technology", "writing", "variety"]
+BOARDS = ["art", "design", "fashion", "humour", "math", "music", "photography", "technology", "writing", "variety"]
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # #
