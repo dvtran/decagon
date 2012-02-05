@@ -14,6 +14,6 @@
 	<div class = "post">
 		<p />
 		<p><b><a href = "/<%= post.board%>/thread/<%= post.thread%>"><%= post.id%></a></b> posted on <%= post.created_on %></p>
-		<p><%=escape post.body %></p>
+		<p><%= post.body %></p>
 	</div>
 <% end %>
