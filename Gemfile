@@ -1,6 +1,5 @@
 source :rubygems
 gem 'sinatra'
-gem 'eventmachine'
 gem 'thin'
 gem 'pg'
 gem 'data_mapper'
