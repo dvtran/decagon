@@ -15,11 +15,10 @@ require 'thin'
 require 'pg'
 require 'data_mapper'
 require 'dm-postgres-adapter'
+require 'rdiscount'
 
-require 'rack/recaptcha'
 # require 'carrierwave' # for file uploading
 # require 'rmagick'
-# require 'rdiscount'
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # helpers
@@ -83,7 +82,7 @@ end
 post '/:board' do
 	if BOARDS.include? params[:board]
 		p = Post.new
-		p.body = params[:body]
+		p.body = RDiscount.new(params[:body], :filter_html).to_html
 		p.board = params[:board]
 		p.parent = true
 		p.created_at = Time.now
@@ -111,7 +110,7 @@ end
 post '/:board/reply/:id' do
 	if Post.count(:thread => params[:id]) > 0
 		p = Post.new
-		p.body = params[:body]
+		p.body = RDiscount.new(params[:body], :filter_html).to_html
 		p.board = params[:board]
 		p.parent = false
 		p.thread = params[:id]
