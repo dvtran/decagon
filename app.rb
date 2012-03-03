@@ -89,7 +89,7 @@ post '/:board' do
 		p.save
 		p.thread = p.id
 		p.save
-		redirect '/' + params[:board]
+		redirect params[:board] + '/thread/' + params[:id]
 	else
 		not_found
 	end
@@ -120,6 +120,9 @@ post '/:board/reply/:id' do
 	else
 		not_found
 	end
+end
+
+get '/page/' do
 end
 
 not_found do
