@@ -68,10 +68,10 @@ get '/' do
 end
 
 # sort the posts by board
-get '/:board' do
+get '/:board/page/:page' do
 	if BOARDS.include? params[:board] # this is to check if the board exsists.
 		@board_name = params[:board]
-		@board_posts = Post.all(:parent => true, :order => :id.desc, :board => params[:board])
+		@board_posts = Post.all(:limit => 11, :offset => params[:page].to_i * 11, :parent => true, :order => :id.desc, :board => params[:board])
 		erb :board
 	else
 		not_found
@@ -79,7 +79,7 @@ get '/:board' do
 end
 
 # handle new board posts
-post '/:board' do
+post '/:board/post' do
 	if BOARDS.include? params[:board]
 		p = Post.new
 		p.body = RDiscount.new(params[:body], :filter_html).to_html
@@ -89,7 +89,7 @@ post '/:board' do
 		p.save
 		p.thread = p.id
 		p.save
-		redirect params[:board] + '/thread/' + params[:id]
+		redirect params[:board] + '/thread/' + p.thread.to_s
 	else
 		not_found
 	end
@@ -120,9 +120,6 @@ post '/:board/reply/:id' do
 	else
 		not_found
 	end
-end
-
-get '/page/' do
 end
 
 not_found do
